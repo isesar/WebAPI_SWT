@@ -148,8 +148,8 @@ C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\zh-Hans
 C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\obj\Debug\netcoreapp3.1\WebAPI_SWT.csproj.CoreCompileInputs.cache
-C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\obj\Debug\netcoreapp3.1\WebAPI_SWT.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\obj\Debug\netcoreapp3.1\WebAPI_SWT.csproj.CoreCompileInputs.cache
+C:\Users\Ivan\source\repos\WebAPI_SWT\WebAPI_SWT\obj\Debug\netcoreapp3.1\WebAPI_SWT.MvcApplicationPartsAssemblyInfo.cache

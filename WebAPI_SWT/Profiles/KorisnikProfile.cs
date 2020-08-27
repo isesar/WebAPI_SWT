@@ -8,7 +8,7 @@ using WebAPI_SWT.Models;
 
 namespace WebAPI_SWT.Profiles
 {
-    public class KorisnikProfile : Profile
+    public class KorisnikProfile : AutoMapper.Profile
     {
         public KorisnikProfile()
         {
@@ -16,8 +16,9 @@ namespace WebAPI_SWT.Profiles
             CreateMap<CreateKorisnikDTO, Korisnik>();
             CreateMap<CreateKorisnikDTO, Korisnik>();
             CreateMap<Korisnik, CreateKorisnikDTO>();
-
         }
+
+
     }
 
 

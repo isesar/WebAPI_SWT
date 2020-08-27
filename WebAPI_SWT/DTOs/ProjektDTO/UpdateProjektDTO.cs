@@ -6,9 +6,8 @@ using WebAPI_SWT.Models;
 
 namespace WebAPI_SWT.DTOs.ProjektDTO
 {
-    public class ProjektDTO
+    public class UpdateProjektDTO
     {
-        public int ProjektId { get; set; }
         public string Opis { get; set; }
         public string Ime { get; set; }
         public DateTime? DatumPocetka { get; set; }
@@ -17,6 +16,5 @@ namespace WebAPI_SWT.DTOs.ProjektDTO
         public bool? IsOver { get; set; }
 
         public virtual Firma FkFirmaNavigation { get; set; }
-        public virtual ICollection<Korisnik> Korisnik { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using WebAPI_SWT.Services.KorisnikServices;
 
 namespace WebAPI_SWT.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class ProjektController : ControllerBase
     {
@@ -45,18 +45,18 @@ namespace WebAPI_SWT.Controllers
             return NotFound();
         }
         [HttpPost]
-        [Route("api/korisnik/")]
-        public ActionResult<CreateProjektDTO> CreateProjekt(CreateProjektDTO createProject)
+        [Route("api/projekt/")]
+        public ActionResult<UpdateProjektDTO> CreateProjekt(CreateProjektDTO createProject)
         {
             var projectModel = _mapper.Map<Projekt>(createProject);
             _repository.CreateProject(projectModel);
             _repository.SaveChanges();
             var projectRead = _mapper.Map<ProjektDTO>(projectModel);
-            return CreatedAtRoute(nameof(GetProjektById), new { Id = projectModel.ProjektId }, projectRead);
+            return CreatedAtAction(nameof(GetProjektById), new { Id = projectModel.ProjektId }, projectRead);
         }
         [HttpPut]
         [Route("api/projekt/{id}")]
-        public ActionResult UpdateProjekt(int id, CreateProjektDTO updateProject)
+        public ActionResult UpdateProjekt(int id, UpdateProjektDTO updateProject)
         {
             var projectModel = _repository.GetProjektById(id);
             if (projectModel == null)

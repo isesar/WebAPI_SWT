@@ -14,6 +14,8 @@ namespace WebAPI_SWT.DTOs.ProjektDTO
         public DateTime? DatunZavrsetka { get; set; }
         public int? FkFirma { get; set; }
         public bool? IsOver { get; set; }
+        public string Mail { get; set; }
+
 
         public virtual Firma FkFirmaNavigation { get; set; }
 

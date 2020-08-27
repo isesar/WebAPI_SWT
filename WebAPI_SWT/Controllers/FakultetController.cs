@@ -52,11 +52,11 @@ namespace WebAPI_SWT.Controllers
             _repository.SaveChanges();
             var faxRead = _mapper.Map<FakultetDTO>(faxModel);
 
-            return CreatedAtRoute(nameof(GetFaxById), new { Id = faxModel.FakultetId }, faxRead);
+            return CreatedAtAction(nameof(GetFaxById), new { Id = faxModel.FakultetId }, faxRead);
         }
         [HttpPut]
         [Route("api/fakultet/{id}")]
-        public ActionResult UpdateFax(int id, CreateFakultetDTO updateFax)
+        public ActionResult UpdateFax(int id, UpdateFakultetDTO updateFax)
         {
             var faxModel = _repository.GetFakultetById(id);
             if (faxModel == null)

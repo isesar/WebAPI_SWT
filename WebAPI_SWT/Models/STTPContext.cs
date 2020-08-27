@@ -119,6 +119,10 @@ namespace WebAPI_SWT.Models
                     .HasColumnName("lozinka")
                     .HasMaxLength(30);
 
+                entity.Property(e => e.Mail)
+                    .HasColumnName("mail")
+                    .HasMaxLength(200);
+
                 entity.HasOne(d => d.FakultetNavigation)
                     .WithMany(p => p.Korisnik)
                     .HasForeignKey(d => d.Fakultet)

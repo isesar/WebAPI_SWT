@@ -3,6 +3,7 @@ using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using WebAPI_SWT.Models;
 using WebAPI_SWT.Services.KorisnikServices;
@@ -37,7 +38,7 @@ namespace WebAPI_SWT.Services.ProjektServices
 
         public IEnumerable<Projekt> GetAll()
         {
-            return _context.Projekt.Include(i => i.FkFirmaNavigation).ToList();
+            return _context.Projekt.Include(i => i.FkFirmaNavigation).ThenInclude(x=>x.Korisnik).ToList();
         }
 
         public Projekt GetProjektById(int id)

@@ -40,12 +40,19 @@ namespace WebAPI_SWT.Services.KorisnikServices
 
         public IEnumerable<Korisnik> GetAll()
         {
-            return _context.Korisnik.Include(i => i.FakultetNavigation).ToList();
+            return _context.Korisnik.Include(i => i.FakultetNavigation)
+                                    .Include(i=>i.FirmaNavigation)
+                                    .Include(i=>i.ProjektNavigation)
+                                    .Include(i=>i.UlogaNavigation)
+                                    .ToList();
         }
 
         public Korisnik GetKorisnikById(int id)
         {
             return _context.Korisnik.Include(i => i.FakultetNavigation)
+                                    .Include(i => i.FirmaNavigation)
+                                    .Include(i => i.ProjektNavigation)
+                                    .Include(i => i.UlogaNavigation)
                                     .FirstOrDefault(p => p.KorisnikId == id);
         }
 

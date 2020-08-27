@@ -35,7 +35,7 @@ namespace WebAPI_SWT.Controllers
 
 
         [HttpGet("{id}")]
-        [Route("api/firma/{id}", Name = "GetKorisnikById")]
+        [Route("api/firma/{id}")]
         public ActionResult<FirmaDTO> GetFirmaById(int id)
         {
             var firma = _repository.GetFirmaById(id);
@@ -54,11 +54,11 @@ namespace WebAPI_SWT.Controllers
             _repository.SaveChanges();
             var firmaRead = _mapper.Map<CreateFirmaDTO>(firmaModel);
 
-            return CreatedAtRoute(nameof(GetFirmaById), new { Id = firmaModel.FirmaId }, firmaRead);
+            return CreatedAtAction(nameof(GetFirmaById), new { Id = firmaModel.FirmaId }, firmaRead);
         }
         [HttpPut]
         [Route("api/korisnik/{id}")]
-        public ActionResult UpdateKorisnik(int id, CreateFirmaDTO updateFirma)
+        public ActionResult UpdateKorisnik(int id, UpdateFirmaDTO updateFirma)
         {
             var firmaModel = _repository.GetFirmaById(id);
             if (firmaModel == null)

@@ -22,6 +22,7 @@ namespace WebAPI_SWT.Models
         public int? Uloga { get; set; }
         public int? Projekt { get; set; }
         public bool? IsAuthenticated { get; set; }
+        public string Mail { get; set; }
 
         public virtual Fakultet FakultetNavigation { get; set; }
         public virtual Firma FirmaNavigation { get; set; }

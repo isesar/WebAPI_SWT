@@ -46,18 +46,18 @@ namespace WebAPI_SWT.Controllers
         }
         [HttpPost]
         [Route("api/aktivnost/")]
-        public ActionResult<CreateAktivnost> CreateActivity(CreateAktivnost createAktivnost)
+        public ActionResult<CreateAktivnostDTO> CreateActivity(CreateAktivnostDTO createAktivnost)
         {
             var activityModel = _mapper.Map<Aktivnost>(createAktivnost);
             _repository.CreateAktivnost(activityModel);
             _repository.SaveChanges();
             var activityRead = _mapper.Map<AktivnostDTO>(activityModel);
 
-            return CreatedAtRoute(nameof(GetActivityById), new { Id = activityModel.AktivnostId }, activityRead);
+            return CreatedAtAction(nameof(GetActivityById), new { Id = activityModel.AktivnostId }, activityRead);
         }
         [HttpPut]
         [Route("api/aktivnost/{id}")]
-        public ActionResult UpdateAktivnost(int id, CreateAktivnost updateAktivnost)
+        public ActionResult UpdateAktivnost(int id, UpdateAktivnostDTO updateAktivnost)
         {
             var activityModel = _repository.GetAktivnostbyId(id);
             if (activityModel == null)

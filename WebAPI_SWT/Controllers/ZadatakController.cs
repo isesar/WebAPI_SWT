@@ -50,12 +50,12 @@ namespace WebAPI_SWT.Controllers
             _repository.CreateZadatak(zadatakModel);
             _repository.SaveChanges();
             var zadatakRead = _mapper.Map<ZadatakDTO>(zadatakModel);
-            return CreatedAtRoute(nameof(GetZadatakById), new { Id = zadatakModel.ZadatakId}, zadatakRead);
+            return CreatedAtAction(nameof(GetZadatakById), new { Id = zadatakModel.ZadatakId}, zadatakRead);
         }
 
         [HttpPut]
         [Route("api/zadatak/{id}")]
-        public ActionResult UpdateZadatak(int id, CreateZadatakDTO updateZadatak)
+        public ActionResult UpdateZadatak(int id, UpdateZadatakDTO updateZadatak)
         {
             var zadatakModel = _repository.GetZadatakById(id);
             if (zadatakModel == null)

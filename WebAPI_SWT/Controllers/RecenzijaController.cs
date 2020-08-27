@@ -51,12 +51,12 @@ namespace WebAPI_SWT.Controllers
             _repository.SaveChanges();
             var recenzijaRead = _mapper.Map<RecenzijaDTO>(recenzijaModel);
 
-            return CreatedAtRoute(nameof(GetRecById), new { Id = recenzijaModel.RecenzijaId }, recenzijaRead);
+            return CreatedAtAction(nameof(GetRecById), new { Id = recenzijaModel.RecenzijaId }, recenzijaRead);
         }
 
         [HttpPut]
         [Route("api/recenzija/{id}")]
-        public ActionResult UpdateRec(int id, CreateRecenzijaDTO updateRec)
+        public ActionResult UpdateRec(int id, UpdateRecenzijaDTO updateRec)
         {
             var recenzijaModel = _repository.GetRecenzijaById(id);
             if (recenzijaModel == null)
