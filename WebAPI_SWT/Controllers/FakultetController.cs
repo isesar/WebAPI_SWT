@@ -11,7 +11,7 @@ using WebAPI_SWT.Services.FakultetServices;
 
 namespace WebAPI_SWT.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class FakultetController : ControllerBase
     {

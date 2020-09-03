@@ -12,7 +12,7 @@ using WebAPI_SWT.Services.FirmaServices;
 
 namespace WebAPI_SWT.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class FirmaController : ControllerBase
     {
@@ -26,11 +26,11 @@ namespace WebAPI_SWT.Controllers
         }
         [HttpGet]
         [Route("api/firma")]
-        public ActionResult<IEnumerable<Firma>> GetAll()
+        public ActionResult<IEnumerable<FirmaDTO>> GetAll()
         {
             var firme = _repository.GetAll();
 
-            return Ok(_mapper.Map<IEnumerable<Firma>>(firme));
+            return Ok(_mapper.Map<IEnumerable<FirmaDTO>>(firme));
         }
 
 
@@ -57,7 +57,7 @@ namespace WebAPI_SWT.Controllers
             return CreatedAtAction(nameof(GetFirmaById), new { Id = firmaModel.FirmaId }, firmaRead);
         }
         [HttpPut]
-        [Route("api/korisnik/{id}")]
+        [Route("api/firma/{id}")]
         public ActionResult UpdateKorisnik(int id, UpdateFirmaDTO updateFirma)
         {
             var firmaModel = _repository.GetFirmaById(id);
@@ -71,7 +71,7 @@ namespace WebAPI_SWT.Controllers
             return NoContent();
         }
         [HttpDelete]
-        [Route("api/korisnik/{id}")]
+        [Route("api/firma/{id}")]
         public ActionResult DeleteKorisnik(int id)
         {
             var firmaModel = _repository.GetFirmaById(id);

@@ -14,6 +14,6 @@ namespace WebAPI_SWT.DTOs.FirmaDTO
         public string Adresa { get; set; }
         public string Email { get; set; }
 
-        public virtual Mjesto FkMjestoNavigation { get; set; }
+       
     }
 }

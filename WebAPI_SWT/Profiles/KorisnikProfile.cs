@@ -14,8 +14,10 @@ namespace WebAPI_SWT.Profiles
         {
             CreateMap<Korisnik, KorisnikDTO>();
             CreateMap<CreateKorisnikDTO, Korisnik>();
-            CreateMap<CreateKorisnikDTO, Korisnik>();
-            CreateMap<Korisnik, CreateKorisnikDTO>();
+            CreateMap<UpdateKorisnikDTO, Korisnik>();
+            CreateMap<Korisnik, UpdateKorisnikDTO>();
+            CreateMap<RegisterDTO, Korisnik>();
+
         }
 
 

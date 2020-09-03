@@ -23,6 +23,8 @@ namespace WebAPI_SWT.Models
         public int? Projekt { get; set; }
         public bool? IsAuthenticated { get; set; }
         public string Mail { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
         public virtual Fakultet FakultetNavigation { get; set; }
         public virtual Firma FirmaNavigation { get; set; }
