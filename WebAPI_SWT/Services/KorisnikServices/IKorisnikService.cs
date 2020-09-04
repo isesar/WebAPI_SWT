@@ -12,6 +12,7 @@ namespace WebAPI_SWT.Services.KorisnikServices
         Korisnik Authenticate(string username, string password);
         IEnumerable<Korisnik> GetAll();
         Korisnik GetKorisnikById(int id);
+
         void CreateKorisnik(Korisnik user, string password);
         void UpdateKorisnik(Korisnik userParam,string password);
         void DeleteKorisnik(Korisnik user);

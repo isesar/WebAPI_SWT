@@ -46,7 +46,7 @@ namespace WebAPI_SWT.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/api/korisnik/authenticate")]
+        [HttpPost("api/korisnik/authenticate")]
         public IActionResult Authenticate([FromBody] AuthenticateDTO model)
         {
             var user = _repository.Authenticate(model.KorisnickoIme, model.Lozinka);
@@ -54,8 +54,8 @@ namespace WebAPI_SWT.Controllers
             {
                 return BadRequest(new { message = "Username or password is incorrect" });
             }
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
