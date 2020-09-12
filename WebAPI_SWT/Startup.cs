@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -18,10 +19,14 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using WebAPI_SWT.Helpers;
 using WebAPI_SWT.Models;
+using WebAPI_SWT.Services.AktivnostDTO;
+using WebAPI_SWT.Services.AktivnostServices;
 using WebAPI_SWT.Services.FakultetServices;
 using WebAPI_SWT.Services.FirmaServices;
 using WebAPI_SWT.Services.KorisnikServices;
 using WebAPI_SWT.Services.ProjektServices;
+using WebAPI_SWT.Services.RecenzijaServices;
+using WebAPI_SWT.Services.ZadatakServices;
 
 namespace WebAPI_SWT
 {
@@ -37,7 +42,7 @@ namespace WebAPI_SWT
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);       
+            services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
             services.AddDbContext<STTPContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SWTConnection")));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -45,6 +50,9 @@ namespace WebAPI_SWT
             services.AddScoped<IProjektServices, ProjektServices>();
             services.AddScoped<IFakultet, FakultetService>();
             services.AddScoped<IFirmaService, FirmaService>();
+            services.AddScoped<IAktivnostServices, AktivnostServices>();
+            services.AddScoped<IRecenzija, RecenzijaServices>();
+            services.AddScoped<IZadatakServices, ZadatakServices>();
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -103,16 +111,16 @@ namespace WebAPI_SWT
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();           
+            app.UseHttpsRedirection();
 
-           app.UseRouting();
-           app.UseAuthentication();
-           app.UseAuthorization();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute(); 
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

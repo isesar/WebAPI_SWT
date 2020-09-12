@@ -38,7 +38,7 @@ namespace WebAPI_SWT.Services.ProjektServices
 
         public IEnumerable<Projekt> GetAll()
         {
-            return _context.Projekt.Include(i => i.FkFirmaNavigation).ThenInclude(x=>x.Korisnik).ToList();
+            return _context.Projekt.Include(i => i.FkFirmaNavigation).ThenInclude(x=>x.Korisnik).ThenInclude(i=>i.Zadatak).ToList();
         }
 
         public Projekt GetProjektById(int id)

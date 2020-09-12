@@ -18,10 +18,11 @@ using WebAPI_SWT.Services;
 using WebAPI_SWT.Services.KorisnikServices;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebAPI_SWT.Controllers
 {
-    
+
     [ApiController]
     public class KorisnikController : ControllerBase
     {
@@ -37,6 +38,7 @@ namespace WebAPI_SWT.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Student")]
         [Route("api/korisnik")]
         public ActionResult<IEnumerable<Korisnik>> GetAll()
         {
@@ -60,7 +62,8 @@ namespace WebAPI_SWT.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
      {
-                    new Claim(ClaimTypes.Name, user.KorisnikId.ToString())
+                    new Claim(ClaimTypes.Name, user.KorisnikId.ToString()),
+                    new Claim(ClaimTypes.Role, user.UlogaNavigation.Ime)
      }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -71,14 +74,13 @@ namespace WebAPI_SWT.Controllers
             {
                 Id = user.KorisnikId,
                 Username = user.Ime,
-                FirstName = user.Mail,
-                LastName = user.UlogaNavigation,
+
                 Token = tokenString
             });
         }
         [AllowAnonymous]
-        [HttpPost("(/api/korisnik/register")]
-        public IActionResult Register([FromBody]RegisterDTO model)
+        [HttpPost("(api/korisnik/register")]
+        public IActionResult Register(RegisterDTO model)
         {
             // map model to entity
             var user = _mapper.Map<Korisnik>(model);
@@ -86,7 +88,7 @@ namespace WebAPI_SWT.Controllers
             try
             {
                 // create user
-                _repository.CreateKorisnik(user, model.Lozinka);
+                _repository.CreateKorisnik(user, user.Lozinka);
                 return Ok();
             }
             catch (AppException ex)
@@ -118,7 +120,7 @@ namespace WebAPI_SWT.Controllers
         }
         [HttpPut]
         [Route("api/korisnik/{id}")]
-        public ActionResult UpdateKorisnik(int id,UpdateKorisnikDTO updateKorisnik)
+        public ActionResult UpdateKorisnik(int id, UpdateKorisnikDTO updateKorisnik)
         {
             var korisnikModel = _repository.GetKorisnikById(id);
             if (korisnikModel == null)
@@ -126,7 +128,7 @@ namespace WebAPI_SWT.Controllers
                 return NotFound();
             }
             _mapper.Map(updateKorisnik, korisnikModel);
-            _repository.UpdateKorisnik(korisnikModel,korisnikModel.Lozinka);
+            _repository.UpdateKorisnik(korisnikModel, korisnikModel.Lozinka);
             _repository.SaveChanges();
             return NoContent();
         }

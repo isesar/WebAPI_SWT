@@ -1,9 +1,16 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using SQLitePCL;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using WebAPI_SWT.Helpers;
 using WebAPI_SWT.Models;
@@ -14,22 +21,23 @@ namespace WebAPI_SWT.Services.KorisnikServices
     public class KorisnikRepo :IKorisnikService
     {
         private readonly STTPContext _context;
-     
+        private readonly object customAuthenticationManager;
 
         public KorisnikRepo(STTPContext context)
         {
             _context = context;
-         
+           
         }
-
-        
+      
+    
         public Korisnik Authenticate(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            var user = _context.Korisnik.SingleOrDefault(x => x.KorisnickoIme == username);
-
+           var user = _context.Korisnik.SingleOrDefault(x => x.KorisnickoIme == username);
+           user.UlogaNavigation =_context.Uloga.SingleOrDefault(x => x.UlogaId == user.Uloga);
+           
             // check if username exists
             if (user == null)
                 return null;
@@ -41,7 +49,8 @@ namespace WebAPI_SWT.Services.KorisnikServices
             // authentication successful
             return user;
         }
-         
+
+        
         public void CreateKorisnik(Korisnik user, string password)
         {
             /*
@@ -51,11 +60,11 @@ namespace WebAPI_SWT.Services.KorisnikServices
             }
             _context.Korisnik.Add(user);
                  */
-                  
+
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
-            if (_context.Korisnik.Any(x => x.KorisnickoIme == user.KorisnickoIme))
+            if (_context.Korisnik.Include(x=>x.Uloga).Any(x => x.KorisnickoIme == user.KorisnickoIme))
                 throw new AppException("Username \"" + user.KorisnickoIme + "\" is already taken");
 
             byte[] passwordHash, passwordSalt;
@@ -81,9 +90,9 @@ namespace WebAPI_SWT.Services.KorisnikServices
         public IEnumerable<Korisnik> GetAll()
         {
             return _context.Korisnik.Include(i => i.FakultetNavigation)
-                                    .Include(i=>i.FirmaNavigation)
-                                    .Include(i=>i.ProjektNavigation)
-                                    .Include(i=>i.UlogaNavigation)
+                                    .Include(i => i.FirmaNavigation)
+                                    .Include(i => i.ProjektNavigation)
+                                    .Include(i => i.UlogaNavigation)
                                     .ToList();
         }
 
@@ -122,7 +131,7 @@ namespace WebAPI_SWT.Services.KorisnikServices
             if (!string.IsNullOrWhiteSpace(userParam.Ime))
                 user.Ime = userParam.Ime;
 
-        
+
             // update password if provided
             if (!string.IsNullOrWhiteSpace(password))
             {

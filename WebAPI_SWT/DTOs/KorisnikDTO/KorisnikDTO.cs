@@ -15,7 +15,7 @@ namespace WebAPI_SWT.DTOs.KorisnikDTO
         public int? BrojTelefona { get; set; }
         public int? Firma { get; set; }
         public string Mail { get; set; }
-
+        public string Token { get; set; }
         public virtual Fakultet FakultetNavigation { get; set; }
         public virtual Firma FirmaNavigation { get; set; }
         public virtual Projekt ProjektNavigation { get; set; }

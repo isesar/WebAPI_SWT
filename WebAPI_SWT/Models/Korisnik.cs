@@ -25,6 +25,7 @@ namespace WebAPI_SWT.Models
         public string Mail { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public string Token { get; set; }
 
         public virtual Fakultet FakultetNavigation { get; set; }
         public virtual Firma FirmaNavigation { get; set; }

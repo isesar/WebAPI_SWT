@@ -29,6 +29,7 @@ namespace WebAPI_SWT.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-54TD9N4\\IVAN;Initial Catalog=STTP;Integrated Security=True");
             }
         }
@@ -129,6 +130,8 @@ namespace WebAPI_SWT.Models
                 entity.Property(e => e.PasswordSalt)
                     .HasColumnName("passwordSalt")
                     .HasMaxLength(1024);
+
+                entity.Property(e => e.Token).HasMaxLength(255);
 
                 entity.HasOne(d => d.FakultetNavigation)
                     .WithMany(p => p.Korisnik)

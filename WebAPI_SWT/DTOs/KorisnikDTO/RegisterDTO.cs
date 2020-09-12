@@ -8,6 +8,7 @@ namespace WebAPI_SWT.DTOs.KorisnikDTO
 {
     public class RegisterDTO
     { 
+
         [Required]
         public string Ime { get; set; }
         [Required]

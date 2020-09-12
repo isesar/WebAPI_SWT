@@ -11,7 +11,7 @@ namespace WebAPI_SWT.Entities
         public int KorisnikId { get; set; }
         public string Ime { get; set; }
         public  string KorisnickoIme { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public string Role { get; set; }
+        public string Token { get; set; }
     }
 }
