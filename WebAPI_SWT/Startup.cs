@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -65,6 +67,7 @@ namespace WebAPI_SWT
             });
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
+        
 
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
@@ -101,6 +104,13 @@ namespace WebAPI_SWT
                     ValidateAudience = false
                 };
             });
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy("Student", policyBuilder => policyBuilder.RequireClaim(ClaimTypes.Role, "Student"));
+                //config.AddPolicy("Student", policyBuilder => policyBuilder.RequireClaim(ClaimTypes.Role, "Student"));
+                //config.AddPolicy("Student", policyBuilder => policyBuilder.RequireClaim(ClaimTypes.Role, "Student"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
